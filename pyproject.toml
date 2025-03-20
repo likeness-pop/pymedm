@@ -1,0 +1,89 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[project]
+name = "pymedm"
+dynamic = ["version"]
+authors = [
+    {name = "Joe V. Tuccillo", email = "tuccillojv@ornl.gov"},
+    {name = "James D. Gaboardi", email = "gaboardijd@ornl.gov"},
+]
+maintainers = [
+    {name = "Joe V. Tuccillo"},
+    {name = "James D. Gaboardi"},
+]
+#license = {text = ""}
+description = "Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python."
+readme = "README.md"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "jax>=0.4.14,<=0.4.31",
+    "jaxlib>=0.4.14,<=0.4.31",
+    "jaxopt>=0.8.1",
+    "multiprocess>=0.70.15",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scipy>=1.12",
+]
+
+[project.urls]
+Repository = "https://code.ornl.gov/likeness/pymedm"
+
+[project.optional-dependencies]
+tests = [
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+    "ruff",
+    "setuptools_scm",
+    "watermark",
+]
+all = ["pymedm[tests]"]
+
+
+[tool.setuptools.packages.find]
+include = [
+    "pymedm",
+    "pymedm.*",
+]
+
+[tool.coverage.run]
+omit = ["pymedm/tests/*"]
+source = ["pymedm"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = ["except ImportError"]
+ignore_errors = true
+omit = ["pymedm/tests/*"]
+
+[tool.ruff]
+line-length = 88
+lint.select = ["E", "F", "W", "I", "UP", "N", "B", "A", "C4", "SIM", "ARG"]
+exclude = [
+    "user_dirs/*",
+]
+lint.ignore = [
+    "C408", # keep as symbol; don't rewrite as a literal
+    "E731", # Do not assign a `lambda` expression, use a `def`"
+    "F401", # unused import
+    "N801", # Class name ... should use CapWords convention 
+    "N802", # Function name ... should be lowercase
+    "N803", # Argument name ... should be lowercase
+    "N806", # Variable ... in function should be lowercase
+    "SIM300", # Yoda conditions are discouraged ..."
+]

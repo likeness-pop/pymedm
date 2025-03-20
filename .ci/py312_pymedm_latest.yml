@@ -1,0 +1,23 @@
+name: py312_pymedm_latest
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - git
+  - multiprocess
+  - numpy
+  - pandas
+  - pip
+  - scipy
+  # testing, etc.
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - ruff
+  - setuptools_scm
+  - watermark
+  - pip:
+    - jax==0.4.31
+    - jaxlib==0.4.31
+    - jaxopt

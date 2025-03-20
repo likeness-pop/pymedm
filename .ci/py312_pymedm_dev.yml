@@ -1,0 +1,31 @@
+#########################################################################################
+# Install all versions from ** bleeding edge git repo or nightly builds where possible **
+#########################################################################################
+
+name: py312_pymedm_dev
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - git
+  - pip
+  # testing, etc.
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - ruff
+  - setuptools_scm
+  - watermark
+  - pip:
+    # nightly build versions
+    - --pre \
+      --extra-index https://pypi.anaconda.org/scipy-wheels-nightly/simple \
+      --extra-index-url https://pypi.org/simple
+    - numpy
+    - pandas
+    - scipy
+    # bleeding edge versions
+    - git+https://github.com/google/jax.git@main
+    - git+https://github.com/google/jaxopt.git@main
+    - git+https://github.com/uqfoundation/multiprocess.git@master
