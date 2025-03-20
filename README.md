@@ -1,4 +1,4 @@
-# PyMEDM: Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python**
+# PyMEDM: Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python
 
 [![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/develop/pipeline.svg?job=karma&key_text=pipeline:+develop&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/develop)
 [![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/main/pipeline.svg?job=karma&key_text=pipeline:+main&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/main)
