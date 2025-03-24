@@ -1,9 +1,10 @@
 # PyMEDM: Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python
 
-[![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/develop/pipeline.svg?job=karma&key_text=pipeline:+develop&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/develop)
-[![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/main/pipeline.svg?job=karma&key_text=pipeline:+main&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/main)
-[![coverage report](https://code.ornl.gov/likeness/pymedm/badges/develop/coverage.svg)](https://code.ornl.gov/likeness/pymedm/-/commits/develop)
-[![Latest Release](https://code.ornl.gov/likeness/pymedm/-/badges/release.svg)](https://code.ornl.gov/likeness/pymedm/-/releases)
+***CI Badge(s) here***
+
+***Codecov Badge Here***
+
+***Release Badge Here***
 
 This is a GPU-ready Python port of [PMEDMrcpp](https://bitbucket.org/jovtc/pmedmrcpp/src/master) via `jax` and `jaxopt`. 
 
