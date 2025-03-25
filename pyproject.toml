@@ -41,7 +41,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://code.ornl.gov/likeness/pymedm"
+Home = "https://github.com/likeness-pop"
+Repository = "https://github.com/likeness-pop/pymedm"
 
 [project.optional-dependencies]
 tests = [
