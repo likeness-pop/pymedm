@@ -31,8 +31,8 @@ jobs:
           py312_pymedm_dev,
         ]
         include:
-          - environment-file: py312_pymedm_latest
-            os: macos-13  # Intel
+        #  - environment-file: py312_pymedm_latest ############## fails because no jax version available; probably no need to test against intel mac anymore
+        #    os: macos-13  # Intel
           - environment-file: py312_pymedm_latest
             os: macos-latest  # Apple Silicon
           - environment-file: py312_pymedm_latest
