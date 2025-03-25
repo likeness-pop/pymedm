@@ -60,7 +60,7 @@ jobs:
 
       - name: JAX info
         run: |
-         python -c "import jax; print('\n\n\n'); jax.print_environment_info(); print('\n\n\n')
+         python -c "import jax; print('\n\n\n'); jax.print_environment_info(); print('\n\n\n')"
 
       - name: run tests
         run: |
