@@ -54,14 +54,18 @@ tests = [
     "setuptools_scm",
     "watermark",
 ]
+notebooks = [
+    "ipywidgets",
+    "jupyterlab",
+]
 jax_gpu = [
    "jax[cuda12]<=0.4.31", # [==0.4.31] for GPU/CUDA
    "jaxlib[cuda12]<=0.4.31", # [==0.4.31] for GPU/CUDA
    "cuda-nvcc",
    "cudatoolkit",
 ]
-all = ["pymedm[tests]"]
-cuda_gpu = ["pymedm[tests,jax_gpu]"]
+all = ["pymedm[tests,notebooks]"]
+cuda_gpu = ["pymedm[tests,notebooks,jax_gpu]"]
 
 [tool.setuptools.packages.find]
 include = [
