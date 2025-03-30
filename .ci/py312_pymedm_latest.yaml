@@ -1,14 +1,15 @@
-name: py311_pymedm_min
+name: py312_pymedm_latest
 channels:
   - conda-forge
 dependencies:
-  - python=3.11
+  - python=3.12
   - git
-  - multiprocess=0.70.15
-  - numpy=1.26.4
-  - pandas=2.2.1
+  - multiprocess
+  - numpy
+  - packaging
+  - pandas
   - pip
-  - scipy=1.12.0
+  - scipy
   # testing, etc.
   - pre-commit
   - pytest
@@ -18,6 +19,6 @@ dependencies:
   - setuptools_scm
   - watermark
   - pip:
-    - jax==0.4.14
-    - jaxlib==0.4.14
-    - jaxopt==0.8.1
+    - jax>=0.5.3
+    - jaxlib>=0.5.3
+    - jaxopt

@@ -1,12 +1,13 @@
+import jax
 import numpy as np
 import pandas as pd
-from jax.lib import xla_bridge
+from jax.extend import backend
 from multiprocess import cpu_count, pool
+from packaging.version import Version
 
 from .pmedm import PMEDM
 
 available_cpus = cpu_count() - 1
-cpu = xla_bridge.get_backend().platform == "cpu"
 
 
 def batch_solve(
@@ -35,6 +36,14 @@ def batch_solve(
     pmds : dict
         A dictionary with keys ``fips`` and values ``pymedm.PMEDM``.
     """
+
+    JAX_GE053 = Version(jax.__version__) >= Version("0.5.3")
+    if JAX_GE053:
+        cpu = backend.get_backend().platform == "cpu"
+    else:
+        from jax.lib import xla_bridge
+
+        cpu = xla_bridge.get_backend().platform == "cpu"
 
     pumas = list(mpu.keys())
 

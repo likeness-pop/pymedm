@@ -1,9 +1,9 @@
 # PyMEDM: Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python
 
-[![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/develop/pipeline.svg?job=karma&key_text=pipeline:+develop&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/develop)
-[![pipeline status](https://code.ornl.gov/likeness/pymedm/badges/main/pipeline.svg?job=karma&key_text=pipeline:+main&key_width=110)](https://code.ornl.gov/likeness/pymedm/-/commits/main)
-[![coverage report](https://code.ornl.gov/likeness/pymedm/badges/develop/coverage.svg)](https://code.ornl.gov/likeness/pymedm/-/commits/develop)
-[![Latest Release](https://code.ornl.gov/likeness/pymedm/-/badges/release.svg)](https://code.ornl.gov/likeness/pymedm/-/releases)
+![tag](https://img.shields.io/github/v/release/likeness-pop/pymedm?include_prereleases&sort=semver)
+[![Continuous Integration](https://github.com/likeness-pop/pymedm/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/likeness-pop/pymedm/actions/workflows/continuous_integration.yml)
+[![codecov](https://codecov.io/gh/likeness-pop/pymedm/branch/develop/graph/badge.svg)](https://codecov.io/gh/likeness-pop/pymedm)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 This is a GPU-ready Python port of [PMEDMrcpp](https://bitbucket.org/jovtc/pmedmrcpp/src/master) via `jax` and `jaxopt`. 
 
