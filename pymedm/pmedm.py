@@ -263,13 +263,13 @@ class PMEDM:
 
         return jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
 
-    def solve(self):
+    def solve(self, jit_jaxopt=True):  # see gh#45
         # pass the other required variables as kwargs
         # so that only ``lam`` is updated
         solve_kws = dict(q=self.q, X=self.X, Y_vec=self.Y_vec, sV=self.sV)
 
         # setup problem and solve
-        solver = jaxopt.LBFGS(fun=self.f, tol=self.tol, jit=True)
+        solver = jaxopt.LBFGS(fun=self.f, tol=self.tol, jit=jit_jaxopt)
 
         # execute solver
         if self.verbose:
