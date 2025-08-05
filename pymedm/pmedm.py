@@ -288,7 +288,12 @@ class PMEDM:
         )
         lvl = jnp.matmul(lam, sVl)
 
-        return jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
+        obj_func = jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
+
+        del q, X, Y_vec, sV, qXl, sVl, lvl, lam
+        gc.collect()
+
+        return obj_func
 
     def solve(self, jit_jaxopt=True):  # see gh#45
         # pass the other required variables as kwargs
