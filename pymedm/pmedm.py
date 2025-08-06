@@ -309,6 +309,7 @@ class PMEDM:
             solve_start_time = time.time()
 
         res = solver.run(init_params=self.lam, **solve_kws)
+        jax.clear_caches()
 
         if self.verbose:
             solve_elapsed_time = np.round(time.time() - solve_start_time, 4)
