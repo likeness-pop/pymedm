@@ -32,6 +32,8 @@ jobs:
         ]
         include:
           - environment-file: py312_pymedm_latest
+            os: macos-15-intel  # Intel
+          - environment-file: py312_pymedm_latest
             os: macos-latest  # Apple Silicon
           - environment-file: py312_pymedm_latest
             os: windows-latest
@@ -76,6 +78,6 @@ jobs:
           --local False
 
       - name: codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
