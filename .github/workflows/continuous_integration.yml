@@ -54,7 +54,7 @@ jobs:
           micromamba-version: "latest"
 
       - name: install package
-        run: "pip install -e . --no-deps"
+        run: "pip install -e . --no-deps --no-cache-dir"
 
       - name: JAX info
         run: |
