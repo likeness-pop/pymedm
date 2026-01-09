@@ -1,4 +1,4 @@
-name: py311_pymedm_min
+name: py311_pymedm_oldest
 channels:
   - conda-forge
 dependencies:
