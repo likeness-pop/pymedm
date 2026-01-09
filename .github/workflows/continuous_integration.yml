@@ -25,7 +25,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         environment-file: [
-          py311_pymedm_min,
+          py311_pymedm_oldest,
           py311_pymedm_latest,
           py312_pymedm_latest,
           py312_pymedm_dev,
