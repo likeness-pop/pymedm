@@ -1,3 +1,4 @@
+import gc
 import os
 import sys
 import time
@@ -135,6 +136,8 @@ class PMEDM:
 
         # Sample weights
         self.wt = wt
+        del wt
+        gc.collect()
 
         # Total population
         self.N = np.sum(self.wt)
@@ -162,12 +165,23 @@ class PMEDM:
         self.Y_vec = jnp.concatenate([self.Y_vec, self.Y1, self.Y2])
         self.Y_vec = self.Y_vec / self.N
 
+        _ix_cg2 = cg2.index.values
+        if include_cg0:
+            del cg0
+        del cg1, cg2
+        gc.collect()
+
         # Geographic constraint error variances
         self.V0 = (
             np.square(sg0.astype("float").values).flatten("F") if include_cg0 else None
         )
         self.V1 = np.square(sg1.astype("float").values).flatten("F")
         self.V2 = np.square(sg2.astype("float").values).flatten("F")
+
+        if include_cg0:
+            del sg0
+        del sg1, sg2
+        gc.collect()
 
         self.V_vec = jnp.array([])
         if self.V0 is not None:
@@ -179,10 +193,14 @@ class PMEDM:
         self.sV_sps = sps.csr_matrix(sV)  # used to compute Hessian inv
         self.sV = sparse.BCOO.from_scipy_sparse(self.sV_sps)
 
+        del sV
+        gc.collect()
+
         # Geographic topology
         if topo is None:
-            _ix = cg2.index.values
-            self.topo = pd.DataFrame({"g2": _ix, "g1": [str(i)[:-1] for i in _ix]})
+            self.topo = pd.DataFrame(
+                {"g2": _ix_cg2, "g1": [str(i)[:-1] for i in _ix_cg2]}
+            )
         else:
             self.topo = topo
         self.n_topo = self.topo.shape[0]
@@ -192,6 +210,9 @@ class PMEDM:
         topo_g1 = self.topo.g1.values
         self.A1 = np.array([1 * (topo_g1 == G) for G in np.unique(topo_g1)])
         self.A2 = np.identity(self.n_topo).astype("int")
+
+        del _ix_cg2, topo, topo_g1
+        gc.collect()
 
         # Solution space
         _cindT = cind.values.astype("float").transpose()
@@ -207,9 +228,12 @@ class PMEDM:
         self.X_sps = self.X_sps.transpose()
         self.X = sparse.BCOO.from_scipy_sparse(self.X_sps)
 
+        del _cindT, X0, X1, X2
+        gc.collect()
+
         # Initial probabilities
         if q is None:
-            self.q = jnp.repeat(wt, self.A1.shape[1], axis=0)
+            self.q = jnp.repeat(self.wt, self.A1.shape[1], axis=0)
             self.q = self.q / np.sum(self.q)
         else:
             self.q = q
@@ -219,6 +243,9 @@ class PMEDM:
             self.lam = jnp.zeros((len(self.Y_vec),))
         else:
             self.lam = lam
+
+        del q, lam
+        gc.collect()
 
         # for storing solver results
         self.res = None
@@ -261,15 +288,20 @@ class PMEDM:
         )
         lvl = jnp.matmul(lam, sVl)
 
-        return jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
+        obj_func = jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
 
-    def solve(self):
+        del q, X, Y_vec, sV, qXl, sVl, lvl, lam
+        gc.collect()
+
+        return obj_func
+
+    def solve(self, jit_jaxopt=True):  # see gh#45
         # pass the other required variables as kwargs
         # so that only ``lam`` is updated
         solve_kws = dict(q=self.q, X=self.X, Y_vec=self.Y_vec, sV=self.sV)
 
         # setup problem and solve
-        solver = jaxopt.LBFGS(fun=self.f, tol=self.tol, jit=True)
+        solver = jaxopt.LBFGS(fun=self.f, tol=self.tol, jit=jit_jaxopt)
 
         # execute solver
         if self.verbose:
@@ -277,6 +309,7 @@ class PMEDM:
             solve_start_time = time.time()
 
         res = solver.run(init_params=self.lam, **solve_kws)
+        jax.clear_caches()
 
         if self.verbose:
             solve_elapsed_time = np.round(time.time() - solve_start_time, 4)
@@ -357,6 +390,9 @@ def compute_allocation(
     Xl = sparse.bcoo_dot_general(-X, lam, dimension_numbers=(((1,), (0,)), ((), ())))
     qXl = q * jnp.exp(Xl)
 
+    del X, lam, Xl
+    gc.collect()
+
     if prob:
         al = qXl / np.sum(qXl)
 
@@ -370,6 +406,9 @@ def compute_allocation(
 
     else:
         al = qXl
+
+    del qXl
+    gc.collect()
 
     if reshape:
         if not n_obs or not n_geo:

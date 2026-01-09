@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Fetch all history for all branches and tags.
 
@@ -54,7 +54,7 @@ jobs:
           micromamba-version: "latest"
 
       - name: install package
-        run: "pip install -e . --no-deps"
+        run: "pip install -e . --no-deps --no-cache-dir"
 
       - name: JAX info
         run: |
@@ -76,6 +76,6 @@ jobs:
           --local False
 
       - name: codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
