@@ -35,8 +35,8 @@ jobs:
         include:
           - environment-file: py314_pymedm_latest
             os: macos-latest  # Apple Silicon
-          - environment-file: py314_pymedm_latest
-            os: windows-latest
+          - environment-file: py313_pymedm_latest
+            os: windows-latest  # Python 3.14 not compatible yet for JAX on  Windows
       fail-fast: false
 
     defaults:
