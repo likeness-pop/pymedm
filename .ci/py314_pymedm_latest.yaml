@@ -1,0 +1,24 @@
+name: py314_pymedm_latest
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14
+  - git
+  - multiprocess
+  - numpy
+  - packaging
+  - pandas
+  - pip
+  - scipy
+  # testing, etc.
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - ruff
+  - setuptools_scm
+  - watermark
+  - pip:
+    - jax>=0.5.3
+    - jaxlib>=0.5.3
+    - jaxopt

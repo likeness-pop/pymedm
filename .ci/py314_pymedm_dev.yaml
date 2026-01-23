@@ -2,11 +2,11 @@
 # Install all versions from ** bleeding edge git repo or nightly builds where possible **
 #########################################################################################
 
-name: py312_pymedm_dev
+name: py314_pymedm_dev
 channels:
   - conda-forge
 dependencies:
-  - python=3.12
+  - python=3.14
   - git
   - packaging
   - pip
