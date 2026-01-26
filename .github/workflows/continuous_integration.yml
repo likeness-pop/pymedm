@@ -25,16 +25,18 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         environment-file: [
-          py311_pymedm_min,
+          py311_pymedm_oldest,
           py311_pymedm_latest,
           py312_pymedm_latest,
-          py312_pymedm_dev,
+          py313_pymedm_latest,
+          py314_pymedm_latest,
+          py314_pymedm_dev,
         ]
         include:
-          - environment-file: py312_pymedm_latest
+          - environment-file: py314_pymedm_latest
             os: macos-latest  # Apple Silicon
-          - environment-file: py312_pymedm_latest
-            os: windows-latest
+          - environment-file: py313_pymedm_latest
+            os: windows-latest  # Python 3.14 not compatible yet for JAX on  Windows
       fail-fast: false
 
     defaults:

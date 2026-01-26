@@ -1,0 +1,24 @@
+name: py311_pymedm_oldest
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - git
+  - multiprocess=0.70.15
+  - numpy=1.26.4
+  - packaging
+  - pandas=2.2.1
+  - pip
+  - scipy=1.12.0
+  # testing, etc.
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - ruff
+  - setuptools_scm
+  - watermark
+  - pip:
+    - jax==0.4.31
+    - jaxlib==0.4.31
+    - jaxopt==0.8.3
