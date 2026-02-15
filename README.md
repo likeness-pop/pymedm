@@ -70,3 +70,9 @@ $ pip install .
 
 1. **Leyk, S., Nagle, N. N., & Buttenfield, B. P.** (2013). Maximum entropy dasymetric modeling for demographic small area estimation. Geographical Analysis, 45(3), 285-306.
 2. **Nagle, N. N., Buttenfield, B. P., Leyk, S., & Spielman, S.** (2014). Dasymetric modeling and uncertainty. Annals of the Association of American Geographers, 104(1), 80-95.
+
+## Citation
+
+If you find this package useful or use it an academic publication, please cite as:
+
+* **Tuccillo, J.V. and Gaboardi, J.D.** (2025) *pymedm*. Computer Software. URL: https://github.com/likeness-pop/pymedm. DOI: [10.11578/dc.20250320.6](https://doi.org/10.11578/dc.20250320.6)
