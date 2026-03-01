@@ -17,6 +17,7 @@ maintainers = [
 ]
 #license = {text = ""}
 description = "Penalized Maximum-Entropy Dasymetric Modeling (P-MEDM) in Python."
+keywords = ["spatial-allocation", "pmedm"]
 readme = "README.md"
 classifiers = [
     "Development Status :: 1 - Planning",
