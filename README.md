@@ -75,4 +75,4 @@ $ pip install .
 
 If you find this package useful or use it an academic publication, please cite as:
 
-* **Tuccillo, J.V. and Gaboardi, J.D.** (2025) *pymedm*. Computer Software. URL: https://github.com/likeness-pop/pymedm. DOI: [10.11578/dc.20250320.6](https://doi.org/10.11578/dc.20250320.6)
+* **Tuccillo, J.V. and Gaboardi, J.D.** (2025) *pymedm*. Computer Software. URL: https://github.com/likeness-pop/pymedm. DOI: [10.11578/dc.20250320.3](https://doi.org/10.11578/dc.20250320.3)
