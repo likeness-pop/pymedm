@@ -8,7 +8,7 @@
 [![codecov](https://codecov.io/gh/likeness-pop/pymedm/branch/develop/graph/badge.svg)](https://codecov.io/gh/likeness-pop/pymedm)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-This is a GPU-ready Python port of [PMEDMrcpp](https://bitbucket.org/jovtc/pmedmrcpp/src/master) via `jax` and `jaxopt`. Support for usage on Windows is not guaranteed.
+This is a GPU-ready Python port of [PMEDMrcpp](https://bitbucket.org/jovtc/pmedmrcpp/src/master) via `jax` and `optimistix`. Support for usage on Windows is not guaranteed.
 
 ## Installation
 
