@@ -3,12 +3,12 @@ import os
 import sys
 import time
 
+import equinox as eqx
 import jax
 import jax.numpy as jnp
-import jaxopt
 import numpy as np
+import optimistix as optx
 import pandas as pd
-from jax import jit
 from jax.experimental import sparse
 from scipy import linalg
 from scipy import sparse as sps
@@ -273,13 +273,12 @@ class PMEDM:
         self.random_state = random_state
 
     @staticmethod
-    @jit
-    def f(lam, **kwargs):
+    def f(lam, args):
         """P-MEDM objective function."""
-        q = kwargs["q"]
-        X = kwargs["X"]
-        Y_vec = kwargs["Y_vec"]
-        sV = kwargs["sV"]
+        q = args["q"]
+        X = args["X"]
+        Y_vec = args["Y_vec"]
+        sV = args["sV"]
 
         qXl = compute_allocation(q, X, lam)
 
@@ -290,25 +289,34 @@ class PMEDM:
 
         obj_func = jnp.matmul(Y_vec, lam) + jnp.log(np.sum(qXl)) + (0.5 * lvl)
 
-        del q, X, Y_vec, sV, qXl, sVl, lvl, lam
-        gc.collect()
-
         return obj_func
 
-    def solve(self, jit_jaxopt=True):  # see gh#45
-        # pass the other required variables as kwargs
+    def solve(self, jit_solver=True):  # see gh#45
+        # pass the other required variables as a dict
         # so that only ``lam`` is updated
-        solve_kws = dict(q=self.q, X=self.X, Y_vec=self.Y_vec, sV=self.sV)
+        solve_args = dict(q=self.q, X=self.X, Y_vec=self.Y_vec, sV=self.sV)
 
         # setup problem and solve
-        solver = jaxopt.LBFGS(fun=self.f, tol=self.tol, jit=jit_jaxopt)
+        # optimistix rtol/atol are step-to-step convergence tolerances;
+        # use a tighter tolerance than jaxopt's gradient-based tol to
+        # achieve comparable solution accuracy
+        solver = optx.LBFGS(rtol=self.tol * 1e-3, atol=self.tol * 1e-3)
 
         # execute solver
         if self.verbose:
             print("Initializing P-MEDM solver...")
             solve_start_time = time.time()
 
-        res = solver.run(init_params=self.lam, **solve_kws)
+        if jit_solver:
+            res = eqx.filter_jit(
+                lambda y0, args: optx.minimise(
+                    self.f, solver, y0, args=args, max_steps=10000
+                )
+            )(self.lam, solve_args)
+        else:
+            res = optx.minimise(
+                self.f, solver, self.lam, args=solve_args, max_steps=10000
+            )
         jax.clear_caches()
 
         if self.verbose:
@@ -316,7 +324,7 @@ class PMEDM:
             print(f"P-MEDM completed in {solve_elapsed_time} seconds.")
 
         # update params
-        self.lam = res.params
+        self.lam = res.value
 
         # append results
         if self.keep_solver:

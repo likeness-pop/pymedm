@@ -33,7 +33,7 @@ requires-python = ">=3.11"
 dependencies = [
     "jax>=0.4.31", # [==0.4.31] for GPU/CUDA; [>=0.5.3] for CPU
     "jaxlib>=0.4.31", # [==0.4.31] for GPU/CUDA; [>=0.5.3] for CPU
-    "jaxopt>=0.8.3",
+    "optimistix>=0.1.0",
     "multiprocess>=0.70.15",
     "packaging",
     "numpy>=1.26",

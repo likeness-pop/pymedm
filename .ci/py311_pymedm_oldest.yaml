@@ -21,4 +21,4 @@ dependencies:
   - pip:
     - jax==0.4.31
     - jaxlib==0.4.31
-    - jaxopt==0.8.3
+    - optimistix==0.1.0

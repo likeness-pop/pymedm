@@ -536,12 +536,12 @@ class TestSynthPMEDMBasicSolve:
         pmd.solve()
 
         # test objective value
-        observed = pmd.res.state.value
+        observed = pmd.res.state.f_info.f
         known = -2.0709795976648397
         assert observed == pytest.approx(known)
 
         # test resultant params
-        observed = pmd.res.params
+        observed = pmd.res.value
         known = numpy.array(
             [
                 -1.418414684442366,
@@ -658,12 +658,12 @@ class TestSynthPMEDMBasicSolveSupplement:
         pmd.solve()
 
         # test objective value
-        observed = pmd.res.state.value
+        observed = pmd.res.state.f_info.f
         known = -2.50151283
         assert observed == pytest.approx(known)
 
         # test resultant params
-        observed = pmd.res.params
+        observed = pmd.res.value
         known = numpy.array(
             [
                 -1.35597485,

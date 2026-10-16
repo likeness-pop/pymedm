@@ -1690,7 +1690,7 @@ class TestPMEDMbatchSolve:
         pmds = batch.batch_solve(mpu)
 
         # test objective values
-        observed = numpy.array([pmds[p].res.state.value for p in pumas])
+        observed = numpy.array([pmds[p].res.state.f_info.f for p in pumas])
         known = numpy.array(
             [
                 -1.6219540409744428,
@@ -1708,7 +1708,7 @@ class TestPMEDMbatchSolve_no_lv0:
         pmds = batch.batch_solve(mpu, include_cg0=False)
 
         # test objective values
-        observed = numpy.array([pmds[p].res.state.value for p in pumas])
+        observed = numpy.array([pmds[p].res.state.f_info.f for p in pumas])
         known = numpy.array(
             [
                 -1.3468085968695942,

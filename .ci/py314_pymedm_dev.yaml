@@ -28,5 +28,5 @@ dependencies:
     - scipy
     # bleeding edge versions
     - git+https://github.com/google/jax.git@main
-    - git+https://github.com/google/jaxopt.git@main
+    - optimistix
     - git+https://github.com/uqfoundation/multiprocess.git@master
